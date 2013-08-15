@@ -1,4 +1,3 @@
-
 #function for reference size# type1=alpha; type2=beta; pi1=specified rate of event in trt1; delta=minimum clinical effect size
 tra.size<-function(type1, type2, pi1, pi2,delta)
     {
@@ -51,8 +50,8 @@ SAP<-function(r, type1, type2, interim, tpi1, delta,p)
 {     
         tpi2<-tpi1+delta 
         se<-function(x) sd(x)/sqrt(r)
-	up<-function(x) mean(x)+qnorm(1-type1/2)*se(x)
-	lo<-function(x) mean(x)-qnorm(1-type1/2)*se(x)
+	up<-function(x) mean(x)+qnorm(0.975)*se(x)
+	lo<-function(x) mean(x)-qnorm(0.975)*se(x)
       #reference method: 
       			Ts<-tra.size(type1,type2,tpi1,tpi1+delta, delta)  # planned reference sample size
         		Tn1<-as.integer(Ts*interim)   #subjuects in each group at stage interim
@@ -95,7 +94,7 @@ SAP<-function(r, type1, type2, interim, tpi1, delta,p)
       			eventGB1<-rbinom(r,as.integer(Gs*interim*p),tpi2)
         		eventGBn1<-rbinom(r,as.integer(Gs*interim*p),tpi1)
           		eventGB2<-rbinom(r,as.integer(Gs*interim*(1-p)),tpi1)
-            	thetaG2<-(eventGB1+eventGB2)/(Gs*interim)  #stata2
+            		thetaG2<-(eventGB1+eventGB2)/(Gs*interim)  #stata2
       			Gepi1<-abs((p*thetaG1-(1-p)*thetaG2)/(2*p-1))  #pi1_hat
         		Gepi2<-abs((p*thetaG2-(1-p)*thetaG1)/(2*p-1)) #pi2_hat
       			Geovp<-(Gepi1+Gepi2)/2 #pi_hat
