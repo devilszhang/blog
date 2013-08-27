@@ -8,19 +8,12 @@
 #x: a vector or data frame with NAs with column format ( id time1---timex)
 #m: number of replicates
 time1<-function(x, m){ 
-							rep1<-function(x){
+							rep1<-function(x)
 							pt1<-sum(x[, 2], na.rm=T)/length(which(!is.na(x[, 2])))
 							t1ber<-rbinom(nrow(x), 1, pt1)
 							t1imp<-ifelse(!is.na(x[, 2]), x[, 2], t1ber)
 							return(t1imp)						
-						}
-							repm<-function(m, x) replicate(m, rep1(x))
-							rep.imp<-repm(m, x)
-							prop<-rowSums(rep.imp)/m
-							imp<-ifelse(prop>0.5, 1, 0)
-							t1imp<-ifelse(!is.na(x[, 2]), x[, 2], imp)
-		return(t1imp)
-}
+					}
 
 
 ####function for the each of the rest columns
