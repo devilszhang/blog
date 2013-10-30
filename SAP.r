@@ -50,8 +50,8 @@ SAP<-function(r, type1, type2, interim, tpi1, delta,p)
 {     
         tpi2<-tpi1+delta 
         se<-function(x) sd(x)/sqrt(r)
-	up<-function(x) mean(x)+qnorm(0.975)*se(x)
-	lo<-function(x) mean(x)-qnorm(0.975)*se(x)
+	up<-function(x) mean(x)+qnorm(1-type1/2)*se(x)
+	lo<-function(x) mean(x)-qnorm(1-type1/2)*se(x)
       #reference method: 
       			Ts<-tra.size(type1,type2,tpi1,tpi1+delta, delta)  # planned reference sample size
         		Tn1<-as.integer(Ts*interim)   #subjuects in each group at stage interim
